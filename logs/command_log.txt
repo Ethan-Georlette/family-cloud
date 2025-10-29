@@ -3,3 +3,6 @@
 
 
 
+2025-10-26 16:56:57 | /home/ethan/family-cloud/backend | mkdir backend && cd backend
+2025-10-26 16:57:10 | /home/ethan/family-cloud/backend | npm init -y
+2025-10-26 16:58:35 | /home/ethan/family-cloud/backend | npm install express minio cors dotenv jsonwebtoken bcrypt
