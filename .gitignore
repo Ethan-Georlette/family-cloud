@@ -1,0 +1,68 @@
+# ============================
+# General
+# ============================
+*.log
+*.tmp
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ============================
+# Environment / Secrets
+# ============================
+.env
+*.env.local
+.env.*
+
+# ============================
+# Docker
+# ============================
+# Ignore all container data
+docker/**/data/
+docker/**/config/
+docker/**/logs/
+
+# Ignore Docker build artifacts
+**/Dockerfile~
+**/docker-compose.override.yml
+
+# ============================
+# MinIO
+# ============================
+# MinIO generates certs, metadata, and internal state
+docker/minio/data/
+docker/minio/config/
+
+# ============================
+# Java / Maven / Gradle (future microservices)
+# ============================
+target/
+build/
+out/
+*.class
+*.jar
+*.war
+*.ear
+
+# Maven
+.mvn/
+.settings/
+dependency-reduced-pom.xml
+
+# Gradle
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
+
+# ============================
+# Node / React (future frontend)
+# ============================
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+dist/
+build/
+.cache/
+
