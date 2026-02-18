@@ -29,4 +29,18 @@ services:
 networks:
   default:
     name: personal-cloud-net
+labels:
+  - "traefik.enable=true"
+
+  # MinIO API
+  - "traefik.http.routers.minio-api.rule=Host(`minio.yourdomain.com`)"
+  - "traefik.http.routers.minio-api.entrypoints=websecure"
+  - "traefik.http.routers.minio-api.tls.certresolver=myresolver"
+  - "traefik.http.services.minio-api.loadbalancer.server.port=9000"
+
+  # MinIO Console
+  - "traefik.http.routers.minio-console.rule=Host(`console.yourdomain.com`)"
+  - "traefik.http.routers.minio-console.entrypoints=websecure"
+  - "traefik.http.routers.minio-console.tls.certresolver=myresolver"
+  - "traefik.http.services.minio-console.loadbalancer.server.port=9001"
 
