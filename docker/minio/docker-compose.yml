@@ -3,7 +3,7 @@ version: "3.9"
 services:
   minio:
     labels:
-      - "traefik.enable=true"
+      - "traefik.enable=false"
 
       # MinIO API
       - "traefik.http.routers.minio-api.rule=Host(`minio.yourdomain.com`)"

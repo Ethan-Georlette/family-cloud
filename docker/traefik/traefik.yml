@@ -4,6 +4,10 @@ api:
 log:
   level: INFO
 
+entryPoints:
+  traefik:
+    address: ":8080"
+
 providers:
   docker: {}
   file:
