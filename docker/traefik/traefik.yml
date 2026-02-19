@@ -5,6 +5,10 @@ log:
   level: INFO
 
 entryPoints:
+  web: 
+    address: ":80"
+  websecure:
+    address: ":443"
   traefik:
     address: ":8080"
 
