@@ -3,18 +3,20 @@ version: "3.9"
 services:
   minio:
     labels:
-      - "traefik.enable=false"
+      - "traefik.enable=true"
 
       # MinIO API
-      - "traefik.http.routers.minio-api.rule=Host(`minio.yourdomain.com`)"
+      - "traefik.http.routers.minio-api.rule=Host(`minio.ethangeorlette.com`)"
       - "traefik.http.routers.minio-api.entrypoints=websecure"
-      - "traefik.http.routers.minio-api.tls.certresolver=myresolver"
+      - "traefik.http.routers.minio-api.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.minio-api.service=minio-api"
       - "traefik.http.services.minio-api.loadbalancer.server.port=9000"
 
       # MinIO Console
-      - "traefik.http.routers.minio-console.rule=Host(`console.yourdomain.com`)"
+      - "traefik.http.routers.minio-console.rule=Host(`console.ethangeorlette.com`)"
       - "traefik.http.routers.minio-console.entrypoints=websecure"
-      - "traefik.http.routers.minio-console.tls.certresolver=myresolver"
+      - "traefik.http.routers.minio-console.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.minio-console.service=minio-console"
       - "traefik.http.services.minio-console.loadbalancer.server.port=9001"
 
     image: quay.io/minio/minio:latest
@@ -37,7 +39,9 @@ services:
       interval: 10s
       timeout: 5s
       retries: 6
+    networks:
+      - cloud-network
 
 networks:
-  default:
-    name: personal-cloud-net
+  cloud-network:
+    external: true

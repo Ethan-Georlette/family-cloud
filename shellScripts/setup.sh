@@ -24,12 +24,12 @@ echo "\033[0;31mInstalling Docker Compose plugin...\033[0m"
 
 echo "\033[0;31m##################################################################################Starting Traefik...\033[0m"
 
-cd docker/traefik
-docker compose up -d
+cd ../docker/compose
+docker compose -f core.yml up -d
 
 echo -e "\033[0;31m##################################################################################Starting MinIO...\033[0m"
-cd ../minio
-docker compose up -d
+
+docker compose -f storage.yml up -d
 
 echo -e "\033[0;31m####################################################################################Setup complete!\033[0m"
 

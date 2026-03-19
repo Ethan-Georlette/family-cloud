@@ -4,9 +4,26 @@ api:
 log:
   level: INFO
 
+entryPoints: 
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
+
+
 providers:
-  docker: {}
+  docker: 
+    exposedByDefault: false
   file:
     directory: /etc/traefik/dynamic
     watch: true
+
+
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: ethan.Georeltte1@gmail.com
+      storage: /acme.json
+      httpChallenge:
+        entryPoint: web
 
