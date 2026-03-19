@@ -26,5 +26,5 @@ services:
 
 networks:
   default:
-    name: personal-cloud-net
+    name: cloud-network
 
