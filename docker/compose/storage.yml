@@ -4,7 +4,7 @@ services:
   minio:
     labels:
       - "traefik.enable=true"
-      - "traefik.http.middlewares.tailscale-only.ipwhitelist.sourcerange=100.64.0.0/10"
+      - "traefik.http.middlewares.tailscale-only.ipallowlist.sourcerange=100.64.0.0/10,192.168.0.0/16"
 
       # MinIO API
       - "traefik.http.routers.minio-api.rule=Host(`minio.ethangeorlette.com`)"
@@ -24,6 +24,9 @@ services:
     image: quay.io/minio/minio:latest
     container_name: minio
     restart: unless-stopped
+    ports:
+      - "9000:9000"
+      - "9001:9001"
 
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}

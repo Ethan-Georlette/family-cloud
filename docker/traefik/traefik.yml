@@ -3,6 +3,7 @@ api:
 
 log:
   level: INFO
+accessLog: {}
 
 entryPoints: 
   web:
