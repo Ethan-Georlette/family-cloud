@@ -4,6 +4,7 @@ services:
   minio:
     labels:
       - "traefik.enable=true"
+      - "traefik.http.middlewares.tailscale-only.ipwhitelist.sourcerange=100.64.0.0/10"
 
       # MinIO API
       - "traefik.http.routers.minio-api.rule=Host(`minio.ethangeorlette.com`)"
@@ -14,6 +15,7 @@ services:
 
       # MinIO Console
       - "traefik.http.routers.minio-console.rule=Host(`console.ethangeorlette.com`)"
+      - "traefik.http.routers.minio-console.middlewares=tailscale-only"
       - "traefik.http.routers.minio-console.entrypoints=websecure"
       - "traefik.http.routers.minio-console.tls.certresolver=letsencrypt"
       - "traefik.http.routers.minio-console.service=minio-console"
