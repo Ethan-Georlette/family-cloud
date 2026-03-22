@@ -14,6 +14,8 @@ services:
 
     networks:
       - cloud-network
+    ports:
+      - "5432:5432"
 
 
 volumes:
