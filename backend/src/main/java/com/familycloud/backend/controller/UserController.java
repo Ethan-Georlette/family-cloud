@@ -1,7 +1,8 @@
 package com.familycloud.backend.controller;
 
+import com.familycloud.backend.dto.UserDTO;
 import com.familycloud.backend.model.User;
-import com.familycloud.backend.repository.UserRepository;
+import com.familycloud.backend.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,19 +11,19 @@ import java.util.List;
 @RequestMapping("/api/users")
 public class UserController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-    @GetMapping
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userRepository.save(user);
+    public User createUser(@RequestBody UserDTO userDTO) {
+        return userService.createUser(userDTO.email, userDTO.password);
+    }
+
+    @GetMapping
+    public List<User> getUsers() {
+        return userService.getAllUsers();
     }
 }
