@@ -10,21 +10,33 @@ import java.util.UUID;
 
 @Service
 public class UserService {
-	
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-	this.passwordEncoder = passwordEncoder;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    public User login(String email, String password) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        boolean matches = passwordEncoder.matches(password, user.getPasswordHash());
+
+        if (!matches) {
+            throw new RuntimeException("Invalid password");
+        }
+
+        return user;
     }
 
     public User createUser(String email, String password) {
         User user = new User();
         user.setEmail(email);
         String hashedPassword = passwordEncoder.encode(password);
-	user.setPasswordHash(hashedPassword);
+        user.setPasswordHash(hashedPassword);
         return userRepository.save(user);
     }
 

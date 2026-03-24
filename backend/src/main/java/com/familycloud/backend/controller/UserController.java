@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.familycloud.backend.dto.LoginDTO;
 import com.familycloud.backend.dto.UserDTO;
 import com.familycloud.backend.dto.UserResponseDTO;
 import com.familycloud.backend.model.User;
@@ -26,6 +27,17 @@ public class UserController {
     @PostMapping
     public UserResponseDTO createUser(@RequestBody UserDTO userDTO) {
         User user = userService.createUser(userDTO.email, userDTO.password);
+        UserResponseDTO response = new UserResponseDTO();
+        response.id = user.getId();
+        response.email = user.getEmail();
+
+        return response;
+    }
+
+    @PostMapping("/login")
+    public UserResponseDTO login(@RequestBody LoginDTO loginDTO) {
+        User user = userService.login(loginDTO.email, loginDTO.password);
+
         UserResponseDTO response = new UserResponseDTO();
         response.id = user.getId();
         response.email = user.getEmail();
