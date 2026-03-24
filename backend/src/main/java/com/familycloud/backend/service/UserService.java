@@ -3,24 +3,28 @@ package com.familycloud.backend.service;
 import com.familycloud.backend.model.User;
 import com.familycloud.backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.UUID;
 
 @Service
 public class UserService {
+	
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+	this.passwordEncoder = passwordEncoder;
     }
 
     public User createUser(String email, String password) {
         User user = new User();
         user.setEmail(email);
-        user.setPasswordHash(password); // later we hash it
-
+        String hashedPassword = passwordEncoder.encode(password);
+	user.setPasswordHash(hashedPassword);
         return userRepository.save(user);
     }
 
