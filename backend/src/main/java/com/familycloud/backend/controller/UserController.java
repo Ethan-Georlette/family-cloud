@@ -12,6 +12,7 @@ import com.familycloud.backend.dto.LoginDTO;
 import com.familycloud.backend.dto.UserDTO;
 import com.familycloud.backend.dto.UserResponseDTO;
 import com.familycloud.backend.model.User;
+import com.familycloud.backend.service.JwtService;
 import com.familycloud.backend.service.UserService;
 
 @RestController
@@ -19,9 +20,11 @@ import com.familycloud.backend.service.UserService;
 public class UserController {
 
     private final UserService userService;
-
-    public UserController(UserService userService) {
+    private final JwtService jwtService;
+    
+    public UserController(UserService userService, JwtService jwtService) {
         this.userService = userService;
+        this.jwtService = jwtService;
     }
 
     @PostMapping
@@ -35,14 +38,12 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public UserResponseDTO login(@RequestBody LoginDTO loginDTO) {
+    public String login(@RequestBody LoginDTO loginDTO) {
         User user = userService.login(loginDTO.email, loginDTO.password);
 
-        UserResponseDTO response = new UserResponseDTO();
-        response.id = user.getId();
-        response.email = user.getEmail();
+        String token = jwtService.generateToken(user.getEmail());
 
-        return response;
+        return token;
     }
 
     @GetMapping
