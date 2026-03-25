@@ -1,14 +1,16 @@
 package com.familycloud.backend.config;
 
+import java.io.IOException;
+
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+
 import com.familycloud.backend.service.JwtService;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.stereotype.Component;
-import org.springframework.web.filter.OncePerRequestFilter;
-
-import java.io.IOException;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
@@ -21,14 +23,23 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain)
+            HttpServletResponse response,
+            FilterChain filterChain)
             throws ServletException, IOException {
 
         String path = request.getRequestURI();
 
         // Allow login & register without token
-        if (path.contains("/login") || path.equals("/api/users")) {
+        String method = request.getMethod();
+
+// Allow login
+        if (path.contains("/login")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+// Allow register (POST only)
+        if (path.equals("/api/users") && method.equals("POST")) {
             filterChain.doFilter(request, response);
             return;
         }
