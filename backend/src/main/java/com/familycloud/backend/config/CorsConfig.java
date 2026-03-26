@@ -1,5 +1,7 @@
 package com.familycloud.backend.config;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -14,9 +16,12 @@ public class CorsConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://banana:3000"); // 👈 your frontend
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
+
+        // 🔥 TEMP: allow everything (for debugging)
+        config.setAllowedOriginPatterns(List.of("*"));
+
+        config.setAllowedHeaders(List.of("*"));
+        config.setAllowedMethods(List.of("*"));
 
         UrlBasedCorsConfigurationSource source
                 = new UrlBasedCorsConfigurationSource();

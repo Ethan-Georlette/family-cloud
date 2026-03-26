@@ -32,6 +32,11 @@ public class JwtFilter extends OncePerRequestFilter {
         // Allow login & register without token
         String method = request.getMethod();
 
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
 // Allow login
         if (path.contains("/login")) {
             filterChain.doFilter(request, response);
