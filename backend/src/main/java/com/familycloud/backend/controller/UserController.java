@@ -27,7 +27,7 @@ public class UserController {
         this.jwtService = jwtService;
     }
 
-    @PostMapping("/signup")
+    @PostMapping
     public UserResponseDTO createUser(@RequestBody UserDTO userDTO) {
         User user = userService.createUser(userDTO.email, userDTO.password);
         UserResponseDTO response = new UserResponseDTO();
