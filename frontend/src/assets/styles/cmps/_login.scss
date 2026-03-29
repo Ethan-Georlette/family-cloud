@@ -1,0 +1,10 @@
+.active-login{
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background-color: aliceblue;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 8px;
+}

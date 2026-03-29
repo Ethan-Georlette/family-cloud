@@ -27,9 +27,9 @@ export default function Login(props) {
     setIsLogin(false);
   }
   return (
-    <div className={isLogin ? " active" : "hidden"}>
+    <div className={isLogin ? " active-login" : "hidden"}>
       <section className="form-wrapper">
-        <span className="close-form" onClick={handleClose}>X</span>
+        <span className="close-form clickable" onClick={handleClose}>X</span>
         <form action="" className="login-signup-form flex column align-center" onSubmit={handleSubmit}>
           <input type="email" name="email" placeholder="Enter your email" value={email}
             onChange={handleChange} />

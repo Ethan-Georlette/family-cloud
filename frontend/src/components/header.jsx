@@ -22,7 +22,7 @@ export default function Header() {
                 </div>
             ) : (
                 <div>
-                    <h4 onClick={onLogin}>Login</h4>
+                    <h4 className="clickable" onClick={onLogin}>Login</h4>
                     <Login isLogin={isLogin} setIsLogin={setIsLogin} />
                 </div>
             )}
