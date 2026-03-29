@@ -1,12 +1,17 @@
 import React from "react";
+import { BrowserRouter as Router } from 'react-router-dom'
 import ReactDOM from "react-dom/client";
-import App from "./App";
 import { AuthProvider } from "./context/AuthContext";
+import { RootCmp } from './root-cmp';
+import './assets/styles/styles.scss'
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
+
 root.render(
   <AuthProvider>
-    <App />
+    <Router>
+      <RootCmp />
+    </Router>
   </AuthProvider>
 );
