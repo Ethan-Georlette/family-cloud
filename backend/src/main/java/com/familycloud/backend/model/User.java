@@ -15,11 +15,17 @@ public class User {
     private String email;
 
     @Column(nullable = false)
+    private String fullname;
+
+    @Column(nullable = false)
     private String passwordHash;
 
     // getters + setters
     public UUID getId() { return id; }
     public void setId(UUID id) { this.id = id; }
+
+    public String getFullname() { return fullname; }
+    public void setFullname(String fullname) { this.fullname = fullname; }
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }

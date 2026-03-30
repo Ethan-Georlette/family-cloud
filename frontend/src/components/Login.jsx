@@ -8,7 +8,8 @@ export default function Login(props) {
   const { email, password } = props.form || {};
   const [form, setForm] = useState({ email: "", password: "" });
   const { loginUser } = useContext(AuthContext);
-
+  const isSignUp = false;
+  
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -27,22 +28,25 @@ export default function Login(props) {
     setIsLogin(false);
   }
   return (
-    <div className={isLogin ? " active-login" : "hidden"}>
-      <section className="form-wrapper">
-        <span className="close-form clickable" onClick={handleClose}>X</span>
-        <form action="" className="login-signup-form flex column align-center" onSubmit={handleSubmit}>
-          <input type="email" name="email" placeholder="Enter your email" value={email}
-            onChange={handleChange} />
+    <>
+      <div className={isLogin ? "screen" : "hidden"} onClick={handleClose}></div>
+      <div className={isLogin ? " active-login" : "hidden"}>
+        <section className="form-wrapper">
+          <span className="close-form clickable" onClick={handleClose}>X</span>
+          <form action="" className="login-signup-form flex column align-center" onSubmit={handleSubmit}>
+            <input type="email" name="email" placeholder="Enter your email" value={email}
+              onChange={handleChange} />
 
-          <input type="password" name="password" placeholder="Enter your password" value={password}
-            onChange={handleChange} />
-          <button type="submit" className="login-signup-btn">Login</button>
-             <div className="to-sign-in flex"><span>Dont have an acount?</span>
-            <span>Sign here</span>
-          </div>
-          {!isLogin && <span className="back-to-login" >Back to Login</span>}
-        </form>
-      </section>
-    </div>
+            <input type="password" name="password" placeholder="Enter your password" value={password}
+              onChange={handleChange} />
+            <button type="submit" className="login-signup-btn">Login</button>
+            <div className="to-sign-in flex"><span>Dont have an acount?</span>
+              <span>Sign here</span>
+            </div>
+            {isSignUp && <span className="back-to-login" >Back to Login</span>}
+          </form>
+        </section>
+      </div>
+    </>
   )
 }

@@ -29,10 +29,11 @@ public class UserController {
 
     @PostMapping
     public UserResponseDTO createUser(@RequestBody UserDTO userDTO) {
-        User user = userService.createUser(userDTO.email, userDTO.password);
+        User user = userService.createUser(userDTO.email, userDTO.password,userDTO.fullname);
         UserResponseDTO response = new UserResponseDTO();
         response.id = user.getId();
         response.email = user.getEmail();
+        response.fullname = user.getFullname();
 
         return response;
     }
@@ -52,6 +53,7 @@ public class UserController {
             UserResponseDTO dto = new UserResponseDTO();
             dto.id = user.getId();
             dto.email = user.getEmail();
+            dto.fullname = user.getFullname();
             return dto;
         }).toList();
     }

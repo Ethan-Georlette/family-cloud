@@ -1,4 +1,4 @@
-.active-login{
+.active-login {
     display: block;
     position: fixed;
     top: 50%;
@@ -7,4 +7,93 @@
     transform: translate(-50%, -50%);
     padding: 20px;
     border-radius: 8px;
-}
+    z-index: 10;
+
+    .form-wrapper {
+        background-color: #fcfcfc;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 5px;
+        font-family: "Quicksand-Light";
+        z-index: 10;
+        width: 300px;
+        height: 300px;
+    }
+
+    .close-form {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        color: #161616;
+        font-size: 1.5rem;
+        font-weight: 800;
+        cursor: pointer;
+
+        &:hover {
+            // color: black;
+            color: #1d61b9;
+        }
+    }
+
+    .login-signup-form {
+        padding-top: 25%;
+        gap: 15px;
+
+        &>* {
+            border: none;
+            border-radius: 5px;
+            width: 90%;
+        }
+
+        button {
+            // border-radius: 8px;
+            height: 2rem;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        input {
+            height: 2rem;
+            outline: none;
+            font-size: 0.8rem;
+            padding-left: 0.5rem;
+            background-color: rgb(46, 44, 44);
+            border: 0;
+            border-radius: 4px;
+            color: rgb(255, 255, 255);
+            opacity: 1;
+            text-overflow: ellipsis;
+            transition-duration: 0.3s;
+            transition-property: opacity width;
+            outline: none;
+        }
+
+        .submit-btns {
+            gap: 3px;
+
+            // &>* {
+            // flex-basis: 50%;
+            // height: 100%;
+            // }
+        }
+
+        .login-signup-btn {
+            background-color: #1d61b9;
+            color: #111;
+            border-radius: 56px;
+            font-family: "Quicksand-Bold";
+            color: white;
+            height: 32px;
+
+            &:hover {
+                background-color: #2374df;
+                font-weight: 700;
+            }
+        }
+        .to-sign-in{
+            justify-content: space-evenly;
+        }
+    }
+}   
