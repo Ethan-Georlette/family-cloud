@@ -1,7 +1,7 @@
 package com.familycloud.backend.controller;
 
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,11 +33,12 @@ public class UserController {
 
     @PostMapping
     public UserResponseDTO createUser(@RequestBody UserDTO userDTO) {
-        User user = userService.createUser(userDTO.email, userDTO.password,userDTO.fullname);
+        User user = userService.createUser(userDTO.email, userDTO.password,userDTO.fullname,userDTO.role);
         UserResponseDTO response = new UserResponseDTO();
         response.id = user.getId();
         response.email = user.getEmail();
         response.fullname = user.getFullname();
+        response.role = user.getRole();
 
         return response;
     }
@@ -54,8 +55,9 @@ public class UserController {
                 user.getEmail(),
                 user.getFullname(),
                 user.getId(),
-                3600 // seconds
-        );
+                3600, // seconds
+                user.getRole()
+        );  
 
         return ResponseEntity.ok(response);
 
@@ -65,19 +67,20 @@ public ResponseEntity<AuthResponse> refresh(@RequestBody Map<String, String> req
 
     String requestRefreshToken = request.get("refreshToken");
 
-    RefreshToken refreshToken = refreshTokenService.verifyRefreshToken(requestRefreshToken);
+    RefreshToken refreshToken = jwtService.verifyRefreshToken(requestRefreshToken);
 
-    User user = userService.findById(refreshToken.getUserId());
+    User user = userService.getUserByEmail(refreshToken.getEmail());
 
     String newAccessToken = jwtService.generateToken(user);
 
     AuthResponse response = new AuthResponse(
             newAccessToken,
             requestRefreshToken,
-            user.getUsername(),
+            user.getEmail(),
+            user.getFullname(),
             user.getId(),
-            user.getRole(),
-            900
+            900,
+            user.getRole()
     );
 
     return ResponseEntity.ok(response);

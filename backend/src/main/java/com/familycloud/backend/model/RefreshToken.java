@@ -1,24 +1,29 @@
 package com.familycloud.backend.model;
+
 import java.util.Date;
 import java.util.UUID;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "refresh_tokens")
 public class RefreshToken {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private UUID id;
 
+    @Column(unique = true, nullable = false)
     private String token;
 
+    @Column(unique = true, nullable = false)
     private String email;
 
-
+    @Column(nullable = false)
     private Date expiryDate;
 
     public String getEmail() {
@@ -33,6 +38,10 @@ public class RefreshToken {
         this.expiryDate = expiryDate;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public UUID getId() {
         return id;
     }
@@ -40,13 +49,13 @@ public class RefreshToken {
     public void setId(UUID id) {
         this.id = id;
     }
-    
 
     public String getToken() {
         return token;
     }
+
     public void setToken(String token) {
         this.token = token;
     }
-    
+
 }

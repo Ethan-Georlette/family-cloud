@@ -18,8 +18,8 @@ public class AuthResponse {
         this.email = email;
         this.fullName = fullName;
         this.userId = userId;
-        this.role = role;
         this.expiresIn = expiresIn;
+        this.role = role;
 
     }
 

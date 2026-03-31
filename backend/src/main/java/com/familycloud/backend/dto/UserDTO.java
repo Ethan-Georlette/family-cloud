@@ -4,4 +4,5 @@ public class UserDTO {
     public String email;
     public String password;
     public String fullname;
+    public String role;
 }

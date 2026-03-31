@@ -59,8 +59,8 @@ public class JwtService {
     public RefreshToken createRefreshToken(User user) {
         RefreshToken refreshToken = new RefreshToken();
 
-        refreshToken.setId(user.getId());
         refreshToken.setToken(UUID.randomUUID().toString());
+        refreshToken.setEmail(user.getEmail());
         refreshToken.setExpiryDate(new Date(System.currentTimeMillis() + 1000L * 60 * 60 * 24 * 7)); // 7 days
         return refreshTokenRepository.save(refreshToken);
     }

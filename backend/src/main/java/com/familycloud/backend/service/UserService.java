@@ -36,10 +36,11 @@ public class UserService {
         return user;
     }
 
-    public User createUser(String email, String password, String fullname) {
+    public User createUser(String email, String password, String fullname,String role) {
         User user = new User();
         user.setEmail(email);
-        user.setFullname(fullname); 
+        user.setFullname(fullname);
+        user.setRole(role);
         String hashedPassword = passwordEncoder.encode(password);
         user.setPasswordHash(hashedPassword);
         return userRepository.save(user);
