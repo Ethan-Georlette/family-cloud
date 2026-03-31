@@ -1,5 +1,6 @@
 package com.familycloud.backend.controller;
 
+import java.util.Map;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -60,28 +61,27 @@ public class UserController {
 
     }
     @PostMapping("/refresh")
-    public ResponseEntity<AuthResponse> refresh(@RequestBody Map<String, String> request) {
+public ResponseEntity<AuthResponse> refresh(@RequestBody Map<String, String> request) {
 
-        String requestRefreshToken = request.get("refreshToken");
+    String requestRefreshToken = request.get("refreshToken");
 
-        RefreshToken refreshToken = jwtService.verifyRefreshToken(requestRefreshToken);
+    RefreshToken refreshToken = refreshTokenService.verifyRefreshToken(requestRefreshToken);
 
-        User user = userService.getUserByEmail(refreshToken.getEmail());
+    User user = userService.findById(refreshToken.getUserId());
 
-        String newAccessToken = jwtService.generateToken(user);
+    String newAccessToken = jwtService.generateToken(user);
 
-        AuthResponse response = new AuthResponse(
-                newAccessToken,
-                requestRefreshToken,
-                user.getEmail(),
-                user.getFullname(),
-                user.getId(),
-                900,
-                user.getRole()
-        );
+    AuthResponse response = new AuthResponse(
+            newAccessToken,
+            requestRefreshToken,
+            user.getUsername(),
+            user.getId(),
+            user.getRole(),
+            900
+    );
 
-        return ResponseEntity.ok(response);
-    }
+    return ResponseEntity.ok(response);
+}
 
     @GetMapping
     public List<UserResponseDTO> getUsers() {
