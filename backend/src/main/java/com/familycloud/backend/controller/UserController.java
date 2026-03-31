@@ -2,15 +2,18 @@ package com.familycloud.backend.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.familycloud.backend.dto.AuthResponse;
 import com.familycloud.backend.dto.LoginDTO;
 import com.familycloud.backend.dto.UserDTO;
 import com.familycloud.backend.dto.UserResponseDTO;
+import com.familycloud.backend.model.RefreshToken;
 import com.familycloud.backend.model.User;
 import com.familycloud.backend.service.JwtService;
 import com.familycloud.backend.service.UserService;
@@ -39,12 +42,45 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginDTO loginDTO) {
         User user = userService.login(loginDTO.email, loginDTO.password);
+        String token = jwtService.generateToken(user);
+        RefreshToken refreshToken = jwtService.createRefreshToken(user);
 
-        String token = jwtService.generateToken(user.getEmail());
+        AuthResponse response = new AuthResponse(
+                token,
+                refreshToken.getToken(),
+                user.getEmail(),
+                user.getFullname(),
+                user.getId(),
+                3600 // seconds
+        );
 
-        return token;
+        return ResponseEntity.ok(response);
+
+    }
+    @PostMapping("/refresh")
+    public ResponseEntity<AuthResponse> refresh(@RequestBody Map<String, String> request) {
+
+        String requestRefreshToken = request.get("refreshToken");
+
+        RefreshToken refreshToken = jwtService.verifyRefreshToken(requestRefreshToken);
+
+        User user = userService.getUserByEmail(refreshToken.getEmail());
+
+        String newAccessToken = jwtService.generateToken(user);
+
+        AuthResponse response = new AuthResponse(
+                newAccessToken,
+                requestRefreshToken,
+                user.getEmail(),
+                user.getFullname(),
+                user.getId(),
+                900,
+                user.getRole()
+        );
+
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping
