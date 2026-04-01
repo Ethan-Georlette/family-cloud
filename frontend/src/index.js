@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import ReactDOM from "react-dom/client";
 import { AuthProvider } from "./context/AuthContext";
 import { RootCmp } from './root-cmp';
@@ -10,8 +10,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <AuthProvider>
-    <Router>
+    <BrowserRouter>
       <RootCmp />
-    </Router>
+    </BrowserRouter>
   </AuthProvider>
 );

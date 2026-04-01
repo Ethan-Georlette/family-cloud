@@ -11,7 +11,7 @@ export class RootCmp extends React.Component {
                 <Header>
                 </Header>
                 <Routes>
-                    {routes.map(route => <Route key={route.path} exact component={route.component} path={route.path} />)}
+                    {routes.map(route => <Route key={route.path} element={<route.component />} path={route.path} />)}
                 </Routes>
             </main>
         )

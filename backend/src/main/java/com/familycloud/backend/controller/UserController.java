@@ -93,6 +93,7 @@ public ResponseEntity<AuthResponse> refresh(@RequestBody Map<String, String> req
             dto.id = user.getId();
             dto.email = user.getEmail();
             dto.fullname = user.getFullname();
+            dto.role = user.getRole();
             return dto;
         }).toList();
     }

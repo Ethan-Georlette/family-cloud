@@ -1,6 +1,7 @@
 import  Home  from "./pages/Home";
 import  About from "./pages/About";  
 import  Pictures from "./pages/Pictures";  
+import Admin from "./pages/Admin";
 
 
 const routes = [
@@ -11,6 +12,10 @@ const routes = [
     {
         path: "/about",
         component: About
+    },
+    {
+        path: "/admin",
+        component: Admin
     },
     {       
         path: "/pictures",

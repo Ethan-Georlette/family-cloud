@@ -18,3 +18,7 @@ export const login = async (data) => {
     return res;
 };
 export const signup = (data) => API.post("", data);
+
+export const getUsers = () => {
+    return API.get("").then(res => res.data);
+};
