@@ -55,7 +55,7 @@ public class UserController {
                 user.getEmail(),
                 user.getFullname(),
                 user.getId(),
-                3600, // seconds
+                10, // seconds
                 user.getRole()
         );  
 
@@ -79,7 +79,7 @@ public ResponseEntity<AuthResponse> refresh(@RequestBody Map<String, String> req
             user.getEmail(),
             user.getFullname(),
             user.getId(),
-            900,
+            10,
             user.getRole()
     );
 
