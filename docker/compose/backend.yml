@@ -16,7 +16,8 @@ services:
       - cloud-network
     ports:
       - "5432:5432"
-
+    depends_on:
+      - keycloak
 
 volumes:
   postgres-data:

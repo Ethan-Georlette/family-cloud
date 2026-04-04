@@ -3,6 +3,11 @@ spring:
     url: jdbc:postgresql://localhost:5432/family_cloud
     username: postgres
     password: strongpassword
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://keycloak:8080/realms/family-cloud
 
   jpa:
     hibernate:
