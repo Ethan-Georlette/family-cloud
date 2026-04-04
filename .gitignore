@@ -65,4 +65,4 @@ yarn-error.log
 dist/
 build/
 .cache/
-docker/compose/traefik/acme.json
+docker/traefik/acme.json
