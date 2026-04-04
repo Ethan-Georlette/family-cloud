@@ -36,6 +36,10 @@ public class JwtFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
+        if (path.contains("/refresh")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
 
 // Allow login
         if (path.contains("/login")) {
