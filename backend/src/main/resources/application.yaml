@@ -1,4 +1,6 @@
 spring:
+  main:
+    allow-bean-definition-overriding: true
   datasource:
     url: jdbc:postgresql://localhost:5432/family_cloud
     username: postgres
@@ -7,7 +9,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://keycloak:8080/realms/family-cloud
+          issuer-uri: https://auth.ethangeorlette.com/realms/family-cloud
 
   jpa:
     hibernate:
