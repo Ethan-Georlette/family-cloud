@@ -1,10 +1,25 @@
 .header {
     padding-inline: 5%;
-    display:flex;
+    display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-color: #F8FAFD;
+    background-color: #0a0a0c;
+    color: #f5f5f7;
     height: 70px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
 
-};
+.header h2 {
+    margin: 0;
+    color: #e50914;
+    letter-spacing: 0.04em;
+}
+
+.header button {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: transparent;
+    color: #f5f5f7;
+    border-radius: 0.4rem;
+    padding: 0.35rem 0.7rem;
+}
