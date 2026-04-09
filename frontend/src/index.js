@@ -4,14 +4,18 @@ import ReactDOM from "react-dom/client";
 import { AuthProvider } from "./context/AuthContext";
 import { RootCmp } from './root-cmp';
 import './assets/styles/styles.scss'
+import keycloak from "./config/keycloak";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
 
-
-root.render(
+keycloak.init({
+  onLoad: "login-required",
+  checkLoginIframe: false // forces login
+}).then(authenticated => {
+  ReactDOM.createRoot(document.getElementById("root")).render(
   <AuthProvider>
     <BrowserRouter>
-      <RootCmp />
+      <RootCmp keycloak={keycloak} />
     </BrowserRouter>
   </AuthProvider>
-);
+  );
+});

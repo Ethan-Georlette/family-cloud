@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { Link } from "react-router-dom";
 import Login from "./Login";
+import keycloak from "../config/keycloak";
 
 export default function Header() {
+    // inside component
+    const username = keycloak.tokenParsed?.preferred_username;
     const { user, logoutUser } = useContext(AuthContext);
     const [isLogin, setIsLogin] = React.useState(false);
     const onLogin = () => {
@@ -17,7 +19,7 @@ export default function Header() {
 
             {user ? (
                 <div>
-                    <span>Welcome, {user.username || "User"}</span>
+                    <span>Welcome, {username }</span>
                     <button onClick={logoutUser}>Logout</button>
                 </div>
             ) : (
