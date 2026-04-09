@@ -1,33 +1,54 @@
 version: "3.9"
 
 services:
+  keycloak-db:
+    image: postgres:16
+    container_name: keycloak-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: ${KC_DB_PASSWORD}
+    volumes:
+      - keycloak_postgres_data:/var/lib/postgresql/data
+    networks:
+      - cloud-network
+
   keycloak:
     image: quay.io/keycloak/keycloak:26.0
     container_name: keycloak
-    command: start-dev
+    restart: unless-stopped
+    command: start
+    depends_on:
+      - keycloak-db
     environment:
       KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
       KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
 
-      KC_PROXY: "edge"
-      KC_HOSTNAME: "https://auth.ethangeorlette.com"
-      KC_HOSTNAME_STRICT: "false"
-      KC_HOSTNAME_STRICT_BACKCHANNEL: "false"
+      KC_DB: postgres
+      KC_DB_URL_HOST: keycloak-db
+      KC_DB_URL_PORT: 5432
+      KC_DB_URL_DATABASE: keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: ${KC_DB_PASSWORD}
 
+      KC_PROXY_HEADERS: xforwarded
+      KC_HOSTNAME: auth.ethangeorlette.com
+      KC_HTTP_ENABLED: "true"
     networks:
       - cloud-network
     ports:
       - "8180:8080"
-
     labels:
       - "traefik.enable=true"
-
       - "traefik.http.routers.keycloak.rule=Host(`auth.ethangeorlette.com`)"
       - "traefik.http.routers.keycloak.entrypoints=websecure"
       - "traefik.http.routers.keycloak.tls.certresolver=letsencrypt"
-
       - "traefik.http.services.keycloak.loadbalancer.server.port=8080"
 
 networks:
   cloud-network:
     external: true
+
+volumes:
+  keycloak_postgres_data:
