@@ -1,24 +1,7 @@
 import API from "./axios";
 
-export const login = async (data) => {
-    const res = await API.post("/login", data);
-    const { accessToken, refreshToken, email,fullname, userId,expiresIn, role } = res.data;
+export const getProtectedUser = () => API.get("/api/test/user");
 
-    localStorage.setItem("accessToken", accessToken);
-    localStorage.setItem("refreshToken", refreshToken);
-    
-    localStorage.setItem("user", JSON.stringify({
-        email,
-        fullname,
-        userId,
-        expiresIn,
-        role
-    }));
+export const getPublic = () => API.get("/api/public");
 
-    return res;
-};
-export const signup = (data) => API.post("", data);
-
-export const getUsers = () => {
-    return API.get("").then(res => res.data);
-};
+export const getUsers = () => API.get("/api/users");
