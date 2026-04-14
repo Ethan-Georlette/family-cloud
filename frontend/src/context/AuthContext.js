@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import keycloak from "../config/keycloak";
 
 export const AuthContext = createContext();
 
@@ -13,6 +14,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logoutUser = () => {
+    keycloak.logout();
     localStorage.removeItem("token");
     setUser(null);
   };

@@ -1,25 +1,40 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { getProtectedUser } from "../api/auth";
+import UserMenu from "./UserMenu";
 import { AuthContext } from "../context/AuthContext";
-import keycloak from "../config/keycloak";
+
 
 export default function Header() {
     // inside component
-    const username = keycloak.tokenParsed?.preferred_username;
-    const { user, logoutUser } = useContext(AuthContext);
+    const [userData, setUserData] = useState(null);
+    const [usermenu, setUserMenu] = useState(false);
+    const { logoutUser } = useContext(AuthContext);
+
+    const handleLogout = () => {
+        logoutUser();
+        setUserMenu(false);
+    };
+
+
+    useEffect(() => {
+        getProtectedUser()
+            .then((res) => setUserData(res.data))
+            .catch((err) => console.error(err));
+    }, []);
     return (
-        <div className={"header" + (user ? " logged-in" : "")}>
+        <div className="header">
 
             <h2>Family Cloud</h2>
 
-            {user ? (
-                <div>
-                    <span>Welcome, {username }</span>
-                    <button onClick={logoutUser}>Logout</button>
-                </div>
-            ) : (
-                <div>
-                </div>
-            )}
+            {usermenu && <div className="menu-backdrop" onClick={() => setUserMenu(false)} />}
+
+
+            <div className="header-user-area">
+                <h4 onClick={() => setUserMenu(!usermenu)}>
+                    welcome {userData && userData.username}
+                </h4>
+                <UserMenu isOpen={usermenu} onLogout={handleLogout} />
+            </div>
 
         </div>
     );

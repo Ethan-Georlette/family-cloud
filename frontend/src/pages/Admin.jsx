@@ -1,23 +1,23 @@
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
-import { getUsers } from "../api/auth";
+import React, { useState, useEffect } from "react";
+import { getAdmin} from "../api/auth";
 
 
 export default function Admin() {
-    const users =getUsers();
-    console.log(users);
-    return (
-        <table>
-            <tbody>
-                <tr>
+    const [adminData, setAdminData] = useState(null);
 
-                    <th>#</th>
-                    <th></th>
-                    <th>Title</th>
-                    <th>◷</th>
-                    <th></th>
-                </tr>
-            </tbody>
-        </table>
-    );
+    useEffect(() => {
+        getAdmin()
+            .then((res) => setAdminData(res.data))
+            .catch((err) => console.error(err));
+    }, []);
+    if (adminData) {
+        return (
+            <div>
+                <h1>Admin Page</h1>
+                <pre>{JSON.stringify(adminData, null, 2)}</pre>
+            </div>
+        );
+    } else {
+        return <div>Loading...</div>;
+    }
 }
