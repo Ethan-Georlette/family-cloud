@@ -13,12 +13,16 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update   # dev only
+      ddl-auto: update # dev only
     show-sql: true
     properties:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
-
+keycloak:
+  server-url: https://auth.ethangeorlette.com
+  realm: family-cloud
+  admin-client-id: family-cloud-backend
+  admin-client-secret: Jry7G5zFlvnETic4e1LYODUSVPhVP9SK
 server:
   port: 8080
