@@ -10,6 +10,10 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: https://auth.ethangeorlette.com/realms/family-cloud
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
 
   jpa:
     hibernate:
@@ -25,7 +29,7 @@ keycloak:
   admin-client-id: family-cloud-backend
   admin-client-secret: Jry7G5zFlvnETic4e1LYODUSVPhVP9SK
 minio:
-  url: http://minio.EthanGeorlette.com:9000
+  url: http://localhost:9000
   access-key: admin
   secret-key: ${MINIO_ROOT_PASSWORD}
   bucket: files
