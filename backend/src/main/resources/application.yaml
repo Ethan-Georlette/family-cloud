@@ -24,5 +24,10 @@ keycloak:
   realm: family-cloud
   admin-client-id: family-cloud-backend
   admin-client-secret: Jry7G5zFlvnETic4e1LYODUSVPhVP9SK
+minio:
+  url: http://minio.EthanGeorlette.com:9000
+  access-key: admin
+  secret-key: ${MINIO_ROOT_PASSWORD}
+  bucket: files
 server:
   port: 8080

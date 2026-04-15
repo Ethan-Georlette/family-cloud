@@ -5,6 +5,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.middlewares.tailscale-only.ipallowlist.sourcerange=100.64.0.0/10,192.168.0.0/16"
+      - "traefik.http.middlewares.tailscale-only.ipallowlist.sourcerange=100.64.0.0/10,192.168.0.0/16,192.168.0.100/32,80.230.95.199/32"
 
       # MinIO API
       - "traefik.http.routers.minio-api.rule=Host(`minio.ethangeorlette.com`)"

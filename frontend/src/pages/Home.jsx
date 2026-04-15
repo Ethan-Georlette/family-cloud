@@ -4,6 +4,7 @@ import { getProtectedUser } from "../api/auth";
 import PhotoSection from "../components/photo";
 import VideoSection from "../components/videos";
 import FilesSection from "../components/files";
+import UploadPage from "../components/UploadTest";
 
 export default function Home() {
     const [userData, setUserData] = useState(null);
@@ -31,6 +32,7 @@ export default function Home() {
         //     </div>
         // </div>
         <div>
+            <UploadPage />
             <h1>Home</h1>
             {userData && <pre>{JSON.stringify(userData, null, 2)}</pre>}
         </div>
