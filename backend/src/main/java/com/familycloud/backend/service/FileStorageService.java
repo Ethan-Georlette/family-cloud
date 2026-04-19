@@ -1,5 +1,6 @@
 package com.familycloud.backend.service;
 
+import java.util.UUID;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +20,7 @@ public class FileStorageService {
     }
 
     public String uploadFile(MultipartFile file) throws Exception {
-        String objectName = file.getOriginalFilename();
+        String objectName = UUID.randomUUID() + "_" + file.getOriginalFilename();
 
         minioClient.putObject(
                 PutObjectArgs.builder()
