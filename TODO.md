@@ -1,306 +1,166 @@
-Family Cloud – Project TODO
-Repository Structure
+#  Family Cloud – TODO
 
- Create project root directory family-cloud
+##  PHASE 1 — Core Auth + Upload (CURRENT)
 
- Create directories:
+###  Auth (Keycloak Integration)
 
- docker
+* [x] Keycloak login works
+* [x] Backend validates JWT
+* [x] Axios sends token automatically
 
- docker/compose
+#### Polish
 
- docker/scripts
+* [ ] Add logout button
 
- backend
+  * [ ] Call `keycloak.logout()`
+* [ ] Protect frontend routes
 
- frontend
+  * [ ] Redirect to login if not authenticated
+* [ ] Show user info in UI
 
- infrastructure
+  * [ ] Username
+  * [ ] Roles (ADMIN / USER)
 
- docs
+---
 
-Infrastructure
-Host Setup
+###  File Upload (MinIO)
 
- Install Docker
+* [x] Upload endpoint works
+* [x] File stored in MinIO
 
- Install Docker Compose
+#### Improve upload
 
- Install Git
+* [ ] Prevent file overwrite
 
- Configure UFW firewall
+  * [ ] Generate UUID filename
+  * [ ] Append original filename
 
- Allow ports:
+---
 
- 22
+###  Metadata 
 
- 80
+#### Database
 
- 443
+* [ ] Create `StoredFile` entity
 
-VPN Access
+  * [ ] id
+  * [ ] originalFileName
+  * [ ] storedFileName
+  * [ ] contentType
+  * [ ] size
+  * [ ] uploadedBy
+  * [ ] uploadedAt
 
- Install Tailscale on host
+* [ ] Create repository
 
- Authenticate node
+  * [ ] `findByUploadedBy(username)`
 
- Verify connection with tailscale status
+#### Upload flow
 
-Reverse Proxy
-Traefik
+* [ ] Update upload service
 
- Deploy Traefik container
+  * [ ] Save metadata after MinIO upload
+  * [ ] Extract username from JWT
 
- Configure HTTPS
+#### API
 
- Configure routing for:
+* [ ] Create endpoint `GET /api/files/my-files`
 
- frontend
+  * [ ] Return only current user files
 
- backend
+---
 
- authentication
+##  PHASE 2 — File Management
 
- MinIO
+### Backend
 
-Storage
-Object Storage
+* [ ] Delete file
 
- Deploy MinIO container
+  * [ ] Remove from MinIO
+  * [ ] Remove from DB
 
- Configure persistent volume /data/minio
+* [ ] Download file
 
- Configure environment variables:
+  * [ ] Generate presigned URL
 
- MINIO_ROOT_USER
+### Frontend
 
- MINIO_ROOT_PASSWORD
+* [ ] File list UI
 
- Create buckets:
+  * [ ] Show filename
+  * [ ] Show upload date
 
- family-photos
+* [ ] File actions
 
- family-videos
+  * [ ] Download button
+  * [ ] Delete button
 
- family-files
+---
 
- Enable bucket versioning
+##  PHASE 3 — Folders
 
-Database
-Metadata Database
+### Backend
 
- Deploy PostgreSQL container
+* [ ] Create `Folder` entity
+* [ ] Link files → folders
 
- Configure persistent volume /data/postgres
+### API
 
- Create database family_cloud
+* [ ] POST `/api/folders`
+* [ ] GET `/api/folders`
 
- Create tables:
+### Frontend
 
- users
+* [ ] Folder navigation UI
+* [ ] Upload into folder
 
- files
+---
 
- folders
+##  PHASE 4 — Sharing
 
- permissions
+* [ ] Share file with another user
 
-Authentication
-Identity Provider
+  * [ ] Add permission table
+* [ ] Public share link (optional)
 
- Deploy Keycloak container
+---
 
- Create realm family-cloud
+##  PHASE 5 — Infrastructure (devops)
 
- Create roles:
+### Backend
 
- admin
+* [ ] Dockerize backend
+* [ ] Add Traefik route
 
- family_user
+### Domains
 
- Configure login flow
-\n\n
- Configure JWT authentication
+* [ ] api.ethangeorlette.com
+* [ ] auth.ethangeorlette.com
+* [ ] minio.ethangeorlette.com
 
-Backend
-Backend Services
+---
 
- Initialize backend project
+##  PHASE 6 — DevOps
 
- Implement service structure:
+* [ ] Dockerize frontend
+* [ ] Create full docker-compose
+* [ ] CI/CD (GitHub Actions)
 
- auth-service
+---
 
- file-service
+##  PHASE 7 — Monitoring
 
- metadata-service
+* [ ] Prometheus
+* [ ] Grafana
+* [ ] Loki logs
 
-File Service
+---
 
- Implement POST /upload
+##  PHASE 8 — Advanced Features
 
- Implement GET /file/{id}
+* [ ] Thumbnail generation
+* [ ] Video metadata
+* [ ] File deduplication
+* [ ] Albums
+* [ ] Mobile UI
 
- Implement DELETE /file/{id}
-
- Store files in MinIO
-
- Store metadata in PostgreSQL
-
- Validate authentication tokens
-
-Metadata Service
-
- Implement GET /files
-
- Implement POST /folder
-
- Implement GET /folders
-
-Performance Modules
-
- Create C module for thumbnail generation
-
- Create C module for video metadata extraction
-
- Create C module for file hashing
-
-Frontend
-React Application
-
- Initialize React project
-
- Implement login page
-
- Integrate authentication
-
- Implement file explorer UI
-
- Implement file upload
-
- Implement image preview
-
- Implement video streaming
-
- Implement file delete
-
- Implement file download
-
-Networking
-Routing
-
- Configure Traefik routes:
-
- cloud.local
-
- api.cloud.local
-
- auth.cloud.local
-
- minio.cloud.local
-
-Observability
-Monitoring
-
- Deploy Prometheus
-
- Deploy Grafana
-
- Configure dashboards for:
-
- CPU
-
- RAM
-
- disk
-
- container metrics
-
- MinIO usage
-
- API latency
-
-Logging
-
- Deploy Loki
-
- Deploy Promtail
-
- Collect logs from all containers
-
-CI/CD
-Pipeline
-
- Create pipeline with GitHub Actions
-
- Configure steps:
-
- run tests
-
- build docker images
-
- push images to registry
-
- deploy to Raspberry Pi
-
-Repository Management
-
- Create main branch
-
- Create dev branch
-
- Enable branch protection
-
-Maintenance Scripts
-Control Scripts
-
- Create directory docker/scripts
-
- Create script start-cloud.sh
-
- Create script stop-cloud.sh
-
- Create script maintenance-mode.sh
-
- Ensure volumes persist after shutdown
-
- Ensure containers restart without data loss
-
-Backup
-Data Protection
-
- Deploy backup tool Restic
-
- Configure MinIO backup
-
- Configure PostgreSQL backup
-
- Configure configuration backup
-
- Schedule daily backups
-
-Security
-
- Enforce HTTPS
-
- Store secrets in .env
-
- Enable rate limiting
-
- Install fail2ban
-
- Enable audit logging
-
-Future Features
-
- Public file sharing links
-
- Photo albums
-
- Thumbnail generation
-
- Mobile-friendly UI
-
- File deduplication
-
- Multi-device sync
