@@ -4,9 +4,9 @@
 
 ###  Auth (Keycloak Integration)
 
-* [x] Keycloak login works
-* [x] Backend validates JWT
-* [x] Axios sends token automatically
+* [ ] Keycloak login works
+* [ ] Backend validates JWT
+* [ ] Axios sends token automatically
 
 #### Polish
 
@@ -25,8 +25,8 @@
 
 ###  File Upload (MinIO)
 
-* [x] Upload endpoint works
-* [x] File stored in MinIO
+* [ ] Upload endpoint works
+* [ ] File stored in MinIO
 
 #### Improve upload
 
