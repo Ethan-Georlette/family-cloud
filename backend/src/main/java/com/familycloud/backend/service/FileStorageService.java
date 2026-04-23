@@ -66,8 +66,7 @@ public class FileStorageService {
         for(StoredFile file:files){
             String storedName = file.getStoredFileName();
             try{
-                names=names+"{\"name\":\""+file.getOriginalFileName()+"\"
-                , \"url\":\""+getPreviewUrl(storedName)+"\"},";
+                names=names+"{\"name\":\""+file.getOriginalFileName()+"\", \"url\":\""+getPreviewUrl(storedName)+"\"},";
             } catch (Exception e) {
                 e.printStackTrace();
             }
