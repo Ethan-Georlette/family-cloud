@@ -2,6 +2,8 @@ package com.familycloud.backend.service;
 
 import java.util.UUID;
 import java.util.List;
+import java.util.ArrayList;
+import com.familycloud.backend.model.StoredFile;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
 import io.minio.GetPresignedObjectUrlArgs;

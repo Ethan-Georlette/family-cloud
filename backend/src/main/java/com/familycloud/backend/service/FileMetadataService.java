@@ -2,6 +2,7 @@ package com.familycloud.backend.service;
 
 import com.familycloud.backend.model.StoredFile;
 import com.familycloud.backend.repository.StoredFileRepository;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -32,7 +33,7 @@ public class FileMetadataService {
 
         return storedFileRepository.save(file);
     }
-    public Object getFilesForUser(String username) {
+    public List<StoredFile> getFilesForUser(String username) {
         return storedFileRepository.findByUploadedBy(username);
     }
 }
