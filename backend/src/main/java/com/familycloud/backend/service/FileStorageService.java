@@ -1,8 +1,11 @@
 package com.familycloud.backend.service;
 
 import java.util.UUID;
+import java.util.List;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
+import io.minio.GetPresignedObjectUrlArgs;
+import io.minio.http.Method;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,8 +45,26 @@ public class FileStorageService {
 
         return storedFileName;
     }
-    public Object listFilesForUser(String username) {
-        Object filenames = fileMetadataService.getFilesForUser(username);
-        listFilesForUser(username)
+
+
+    public String getPreviewUrl(String storedFileName) throws Exception {
+        return minioClient.getPresignedObjectUrl(
+                GetPresignedObjectUrlArgs.builder()
+                        .method(Method.GET)
+                        .bucket(bucketName)
+                        .object(storedFileName)
+                        .expiry(60 * 60) // 1 hour
+                        .build()
+        );
+    }
+
+    public List<String> listFilesNames(String username){
+        List<StoredFile> files = fileMetadataService.getFilesForUser(username);
+        List<String> names = new ArrayList<>();
+        for(StoredFile file:files){
+            String storedName = file.getStoredFileName();
+            names.add(storedName);
+        }
+        return names;
     }
 }
