@@ -11,4 +11,4 @@ export const uploadFile = (file) => {
     });
 };
 
-export const getFiles = () => API.get("/api/files/all");
+export const getFiles = () => API.get("/api/files/preview");

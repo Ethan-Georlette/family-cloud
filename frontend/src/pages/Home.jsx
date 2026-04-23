@@ -34,7 +34,7 @@ export default function Home() {
         <div>
             <UploadPage />
             <h1>Home</h1>
-            {userData && <pre>{JSON.stringify(userData, null, 2)}</pre>}
+            {userData && <img src={userData} alt="Uploaded" />}
         </div>
     );
 }
