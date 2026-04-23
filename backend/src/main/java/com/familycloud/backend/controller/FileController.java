@@ -44,17 +44,7 @@ public class FileController {
 
     @GetMapping("/preview")
     public ResponseEntity<String> getPreviewUrl(Authentication authentication) {
-        List <String> names = fileStorageService.listFilesNames(authentication.getName());
-        List<String> urls = new ArrayList<>();
-
-        try {
-            for(String name:names){
-            String url = fileStorageService.getPreviewUrl(name);
-            urls.add(url);
-            }
-            return ResponseEntity.ok(urls.get(2));
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Failed to generate preview URL");
-        }
+        String names = fileStorageService.listFilesNames(authentication.getName());
+        return ResponseEntity.ok(names);
     }
 }
