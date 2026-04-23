@@ -2,7 +2,10 @@ package com.familycloud.backend.controller;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
+
 import com.familycloud.backend.service.FileStorageService;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -49,7 +52,7 @@ public class FileController {
             String url = fileStorageService.getPreviewUrl(name);
             urls.add(url);
             }
-            return ResponseEntity.ok(urls.get(0));
+            return ResponseEntity.ok(urls.toString());
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body("Failed to generate preview URL");
         }
