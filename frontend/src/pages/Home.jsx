@@ -5,12 +5,12 @@ import PhotoSection from "../components/photo";
 import VideoSection from "../components/videos";
 import FilesSection from "../components/files";
 import UploadPage from "../components/UploadTest";
+import { getFiles } from "../api/file";
 
 export default function Home() {
     const [userData, setUserData] = useState(null);
-
     useEffect(() => {
-        getProtectedUser()
+        getFiles()
             .then((res) => setUserData(res.data))
             .catch((err) => console.error(err));
     }, []);

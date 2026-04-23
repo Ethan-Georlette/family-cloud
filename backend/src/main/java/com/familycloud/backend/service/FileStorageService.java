@@ -42,4 +42,8 @@ public class FileStorageService {
 
         return storedFileName;
     }
+    public Object listFilesForUser(String username) {
+        Object filenames = fileMetadataService.getFilesForUser(username);
+        listFilesForUser(username)
+    }
 }

@@ -29,4 +29,9 @@ public class FileController {
             return ResponseEntity.internalServerError().body("Upload failed: " + e.getMessage());
         }
     }
+    @GetMapping("/all")
+    public ResponseEntity<?> listFiles(Authentication authentication) {
+        String username = authentication.getName();
+        return ResponseEntity.ok(fileStorageService.listFilesForUser(username));
+    }
 }

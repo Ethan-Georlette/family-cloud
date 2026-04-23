@@ -32,4 +32,7 @@ public class FileMetadataService {
 
         return storedFileRepository.save(file);
     }
+    public Object getFilesForUser(String username) {
+        return storedFileRepository.findByUploadedBy(username).s;
+    }
 }
