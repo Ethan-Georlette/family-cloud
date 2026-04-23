@@ -60,12 +60,12 @@ public class FileStorageService {
         );
     }
 
-    public List<String> listFilesNames(String username){
+    public String listFilesNames(String username){
         List<StoredFile> files = fileMetadataService.getFilesForUser(username);
-        List<String> names = new ArrayList<>();
+        String names="{";
         for(StoredFile file:files){
             String storedName = file.getStoredFileName();
-            names.add(storedName);
+            names=names+"{\"name\":\""+storedName+"\",}";
         }
         return names;
     }

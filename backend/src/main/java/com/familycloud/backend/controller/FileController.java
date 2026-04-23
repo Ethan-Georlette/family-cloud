@@ -52,7 +52,7 @@ public class FileController {
             String url = fileStorageService.getPreviewUrl(name);
             urls.add(url);
             }
-            return ResponseEntity.ok(urls.toString());
+            return ResponseEntity.ok(urls.get(2));
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body("Failed to generate preview URL");
         }

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { getProtectedUser } from "../api/auth";
+import { getFiles } from "../api/file";
 
 import PhotoSection from "../components/photo";
 import VideoSection from "../components/videos";
 import FilesSection from "../components/files";
 import UploadPage from "../components/UploadTest";
-import { getFiles } from "../api/file";
 
 export default function Home() {
     const [userData, setUserData] = useState(null);
@@ -34,7 +34,8 @@ export default function Home() {
         <div>
             <UploadPage />
             <h1>Home</h1>
-            {userData && <img src={userData} alt="Uploaded" />}
+            {userData && <img src={userData.url} alt="User File" style={{ width: "200px" }} />}
+            {userData && <pre>{userData.url}</pre>}
         </div>
     );
 }
