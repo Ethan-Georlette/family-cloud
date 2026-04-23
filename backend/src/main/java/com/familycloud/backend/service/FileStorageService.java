@@ -62,16 +62,16 @@ public class FileStorageService {
 
     public String listFilesNames(String username){
         List<StoredFile> files = fileMetadataService.getFilesForUser(username);
-        String names="{";
+        String names="[";
         for(StoredFile file:files){
             String storedName = file.getStoredFileName();
             try{
-                names=names+"{\"name\":\""+file.getOriginalFileName()+"\", \"url\":\""+getPreviewUrl(storedName)+"\"},";
+                names=names+"{\"name\":\""+file.getOriginalFileName()+"\", \"url\":\""+getPreviewUrl(storedName)+"\", \"contentType\":\""+file.getContentType()+"\"},";
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        names=names.substring(0,names.length()-1)+"}";
+        names=names.substring(0,names.length()-1)+"]";
         return names;
     }
 }

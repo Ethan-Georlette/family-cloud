@@ -1,26 +1,33 @@
-const photoItems = [
-	{ title: "Beach Trip", meta: "42 photos" },
-	{ title: "Birthday Party", meta: "58 photos" },
-	{ title: "Sunday Picnic", meta: "23 photos" },
-	{ title: "Winter Album", meta: "36 photos" }
-];
+import { useEffect, useState } from "react";
 
 export default function PhotoSection() {
-	return (
-		<section className="media-row">
-			<div className="media-row-head">
-				<h2>Photos</h2>
-			</div>
+	const [photoItems, setPhotoItems] = useState([]);
+	const [userData, setUserData] = useState(null);
+	for (const file in userData) {
+		if (file.contentType && file.contentType.startsWith("image/")) {
+			photoItems.push({
+				title: file.name,
+				url: file.url,
+			});
+		}
+	}
+	console.log("Photo Items:", photoItems);
+	console.log("Photo Items:", userData);
+		return (
+			<section className="media-row">
+				<div className="media-row-head">
+					<h2>Photos</h2>
+				</div>
 
-			<div className="media-grid">
-				{photoItems.map((item) => (
-					<article key={item.title} className="media-card media-card-photo">
-						<div className="media-card-sheen" />
-						<h3>{item.title}</h3>
-						<p>{item.meta}</p>
-					</article>
-				))}
-			</div>
-		</section>
-	);
+				<div className="media-grid">
+					{photoItems.map((item) => (
+						<article key={item.title} className="media-card media-card-photo">
+							<div className="media-card-sheen" />
+							<h3>{item.title}</h3>
+							<img src={item.url} alt={item.title} />
+						</article>
+					))}
+				</div>
+			</section>
+		);
 }

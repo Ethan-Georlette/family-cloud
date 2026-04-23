@@ -1,0 +1,18 @@
+[
+    {
+        "name": "Screenshot (28).png",
+        "url": "http://localhost:9000/files/bd1879d6-4560-4c09-9895-ae9566a823e8_Screenshot%20%2828%29.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=admin%2F20260423%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260423T170200Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=c4ca4c5fd40fe9deb22f041ac78dd07ac3098950cb444e1db40f5f5bd8bf5698",
+    },
+    {
+        "name": "Screenshot (21).png",
+        "url": "http://localhost:9000/files/6e2060a7-57bd-43e7-9192-f8cf968ee6ef_Screenshot%20%2821%29.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=admin%2F20260423%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260423T170200Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=7bcc07b2918165785aad7e51cbd487329e27774b7e3510af0c3403dacf8423ab"
+    },
+    {
+        "name": "Ethans-degree-plan.xlsx",
+        "url": "http://localhost:9000/files/140602b6-cad7-46f9-b9aa-f5093fe2c230_Ethans-degree-plan.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=admin%2F20260423%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260423T170200Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=1cbd98377e10274865ebf40f5c9a0013370c1a233d7d792ac410965e32f6f57c"
+    },
+    {
+        "name": "XV6 Instalation and EclipseConfig.pdf",
+        "url": "http://localhost:9000/files/17eef0ef-701d-4b26-a86a-8b5b8cf48ffc_XV6%20Instalation%20and%20EclipseConfig.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=admin%2F20260423%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260423T170200Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=bae84466c165a6d81b655d1c7ecc3c6c3afe1246079bda12feae9636c069f5a8"
+    }
+]

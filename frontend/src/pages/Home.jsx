@@ -35,8 +35,8 @@ export default function Home() {
         <div>
             <UploadPage />
             <h1>Home</h1>
-            {/* {userData && <img src={userData.url} alt="User File" style={{ width: "200px" }} />} */}
-            {/* {userData && <pre>{JSON.stringify(userData, null, 2)}</pre>} */}
+            <PhotoSection />
+           
         </div>
     );
 }
