@@ -6,16 +6,23 @@ import PhotoSection from "../components/photo";
 import VideoSection from "../components/videos";
 import FilesSection from "../components/files";
 import UploadPage from "../components/UploadTest";
+import { getPhotos } from "../service/fileService";
 
 export default function Home() {
     const [userData, setUserData] = useState(null);
+    const [userPhotos, setUserPhotos] = useState(null);
     useEffect(() => {
         getFiles()
-            .then((res) => setUserData(res.data))
+            .then((res) => {
+                setUserData(res.data);
+                setUserPhotos(getPhotos(res.data));
+            })
             .catch((err) => console.error(err));
     }, []);
     console.log("User Data:", userData);
+    console.log("User Photos:", userPhotos);
     return (
+
         // <div className="netflix-home">
         //     <section className="hero-banner">
         //         <div className="hero-overlay">
@@ -35,7 +42,7 @@ export default function Home() {
         <div>
             <UploadPage />
             <h1>Home</h1>
-            <PhotoSection />
+            <PhotoSection userPhotos={userPhotos} setUserPhotos={setUserPhotos} />
            
         </div>
     );

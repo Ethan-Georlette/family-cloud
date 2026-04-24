@@ -1,18 +1,7 @@
 import { useEffect, useState } from "react";
 
-export default function PhotoSection() {
-	const [photoItems, setPhotoItems] = useState([]);
-	const [userData, setUserData] = useState(null);
-	for (const file in userData) {
-		if (file.contentType && file.contentType.startsWith("image/")) {
-			photoItems.push({
-				title: file.name,
-				url: file.url,
-			});
-		}
-	}
-	console.log("Photo Items:", photoItems);
-	console.log("Photo Items:", userData);
+export default function PhotoSection({ userPhotos, setUserPhotos }) {
+	console.log("Photo Items:", userPhotos);
 		return (
 			<section className="media-row">
 				<div className="media-row-head">
@@ -20,7 +9,7 @@ export default function PhotoSection() {
 				</div>
 
 				<div className="media-grid">
-					{photoItems.map((item) => (
+					{userPhotos && userPhotos.map((item) => (
 						<article key={item.title} className="media-card media-card-photo">
 							<div className="media-card-sheen" />
 							<h3>{item.title}</h3>
