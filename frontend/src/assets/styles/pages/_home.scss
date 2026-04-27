@@ -126,8 +126,4 @@
 	.media-grid {
 		grid-template-columns: repeat(2, minmax(120px, 1fr));
 	}
-	:hover{
-		transform: translateY(0) scale(1);
-		border-color: rgba(229, 9, 20, 0.08);
-	}
 }
