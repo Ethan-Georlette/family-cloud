@@ -5,6 +5,7 @@ export const getPhotos = (userData) => {
         if (file.contentType&& file.contentType.startsWith("image/")) {
             photoItems.push({
                 title: file.name,
+                storedName: file.storedName,
                 url: file.url,
             });
         }

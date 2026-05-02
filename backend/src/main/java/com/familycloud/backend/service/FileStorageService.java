@@ -66,12 +66,21 @@ public class FileStorageService {
         for(StoredFile file:files){
             String storedName = file.getStoredFileName();
             try{
-                names=names+"{\"name\":\""+file.getOriginalFileName()+"\", \"url\":\""+getPreviewUrl(storedName)+"\", \"contentType\":\""+file.getContentType()+"\"},";
+                names=names+"{\"storedName\":\""+storedName+"\", \"name\":\""+file.getOriginalFileName()+"\", \"url\":\""+getPreviewUrl(storedName)+"\", \"contentType\":\""+file.getContentType()+"\"},";
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         names=names.substring(0,names.length()-1)+"]";
         return names;
+    }
+    public void deleteFile(String storedFileName) throws Exception {
+        minioClient.removeObject(
+                io.minio.RemoveObjectArgs.builder()
+                        .bucket(bucketName)
+                        .object(storedFileName)
+                        .build()
+        );
+        fileMetadataService.deleteFileMetadata(storedFileName);
     }
 }

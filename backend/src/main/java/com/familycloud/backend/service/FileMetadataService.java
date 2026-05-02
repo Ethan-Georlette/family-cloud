@@ -36,4 +36,10 @@ public class FileMetadataService {
     public List<StoredFile> getFilesForUser(String username) {
         return storedFileRepository.findByUploadedBy(username);
     }
+    public void deleteFileMetadata(String storedFileName) {
+        StoredFile file = storedFileRepository.findByStoredFileName(storedFileName);
+        if (file != null) {
+            storedFileRepository.delete(file);
+        }
+    }
 }

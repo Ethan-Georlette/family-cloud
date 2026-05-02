@@ -47,4 +47,17 @@ public class FileController {
         String names = fileStorageService.listFilesNames(authentication.getName());
         return ResponseEntity.ok(names);
     }
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteFile(
+            @RequestParam("fileName") String fileName,
+            Authentication authentication
+    ) {
+        try {
+            fileStorageService.deleteFile(fileName);
+            return ResponseEntity.ok("Deleted: " + fileName);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Delete failed: " + e.getMessage());       
+        }
+    }
+
 }

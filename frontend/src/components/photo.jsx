@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { deleteFile } from "../api/file";
 
 export default function PhotoSection({ userPhotos, setUserPhotos }) {
 	console.log("Photo Items:", userPhotos);
@@ -14,6 +15,7 @@ export default function PhotoSection({ userPhotos, setUserPhotos }) {
 							<div className="media-card-sheen" />
 							<h3>{item.title}</h3>
 							<img src={item.url} alt={item.title} />
+							<div onClick={() => deleteFile(item.storedName)}>Delete</div>
 						</article>
 					))}
 				</div>

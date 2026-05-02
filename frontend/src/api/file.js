@@ -12,3 +12,5 @@ export const uploadFile = (file) => {
 };
 
 export const getFiles = () => API.get("/api/files/preview");
+
+export const deleteFile = (fileName) => API.delete(`/api/files/${fileName}`);
