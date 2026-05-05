@@ -75,6 +75,7 @@ public class FileStorageService {
         return names;
     }
     public void deleteFile(String storedFileName) throws Exception {
+        System.out.println("Deleting file: " + storedFileName);
         minioClient.removeObject(
                 io.minio.RemoveObjectArgs.builder()
                         .bucket(bucketName)
