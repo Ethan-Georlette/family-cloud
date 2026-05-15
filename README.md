@@ -12,6 +12,5 @@ set +a
 //whatttttt 
 export KEYCLOAK_ADMIN_CLIENT_SECRET='your-secret-here'
 ./mvnw spring-boot:run
-b
 
 
