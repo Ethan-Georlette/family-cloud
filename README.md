@@ -12,6 +12,9 @@ set +a
 //whatttttt 
 export KEYCLOAK_ADMIN_CLIENT_SECRET='your-secret-here'
 ./mvnw spring-boot:run
+<<<<<<< HEAD
 
+=======
+>>>>>>> e873440731a475544a0cd36534285e8e36212baa
 
 
