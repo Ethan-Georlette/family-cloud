@@ -16,5 +16,4 @@ export KEYCLOAK_ADMIN_CLIENT_SECRET='your-secret-here'
 
 =====
 
-
-= 
+fff= 
